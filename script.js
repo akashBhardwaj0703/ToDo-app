@@ -30,10 +30,7 @@ function deleteLocal(note) {
 
 function addItem(event) {
     let value = getInput();
-    value.trim();
-
-    if (value === "") return;
-
+    
     let a = fillLocal(value);
     if (a == 0) return;
 
