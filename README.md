@@ -12,6 +12,6 @@
 ## 📦 Installation  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/To-Do-List.git
+   git clone https://github.com/your-username/ToDo-app.git
 
 2. Open index.html in a browser.
