@@ -17,4 +17,5 @@
 2. Open index.html in a browser.
 
 ## 🔗Live Demo Link
-    https://akashbhardwaj0703.github.io/ToDo-app/
+[click here to use the ToDo-app](https://akashbhardwaj0703.github.io/ToDo-app/)
+    
