@@ -149,16 +149,14 @@ function saveCheckBoxes(event) {
         let adj = event.target.nextElementSibling;
 
         let txt = adj.textContent;
+        console.log(txt);
 
         let items = JSON.parse(localStorage.getItem("myItems")) || [];
 
-        
-        let newItems;
-
-        items.forEach(e =>{
-            if(e[0] == txt){
-                e[1] = event.target.checked;
-            }
+        items.forEach(pair=>{
+            if(pair[0] === txt){
+                pair[1] = event.target.checked;
+            } 
         })
         localStorage.setItem("myItems", JSON.stringify(items));
     }
@@ -173,7 +171,7 @@ function addThroughLocal() {
 
     // let z = Object.values(localStorage)
     // console.log(z)
-    let values = JSON.parse(localStorage.getItem("myItems"))
+    let values = JSON.parse(localStorage.getItem("myItems")) || []
 
     if(values == []) return;
     // console.log(values);
