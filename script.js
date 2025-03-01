@@ -10,21 +10,21 @@ let btn = document.getElementById("addBtn");
 
 function fillLocal(note) {
     let items = JSON.parse(localStorage.getItem("myItems")) || [];
-    let x = false;
-    for(let e of items) {
-        if(e === note) {
+
+    for (let e of items) {
+        if (e[0] === note) {
             alert("value already exist");
             return 0;
         }
     }
-    items.push(note);
+
+    items.push([note, false]);
     localStorage.setItem("myItems", JSON.stringify(items));
 }
 
 function deleteLocal(note) {
     let items = JSON.parse(localStorage.getItem("myItems")) || [];  //covert the stored string back to array :)
-    items = items.filter(item => item !== note);
-    
+    items = items.filter(item => item[0] !== note);
     localStorage.setItem("myItems", JSON.stringify(items));  //store value of item key as string :)
 }
 
@@ -35,7 +35,7 @@ function addItem(event) {
     if (value === "") return;
 
     let a = fillLocal(value);
-    if(a == 0) return;
+    if (a == 0) return;
 
     //creating a div
     let maindiv = document.createElement("div");
@@ -43,7 +43,7 @@ function addItem(event) {
 
     // if(event.target.tagName === "BUTTON")
 
-    
+
 
     let button = document.createElement("button");
     button.classList = "deleteBtn";
@@ -101,29 +101,73 @@ function remove1(event) {
 }
 
 
+
 btmDiv.addEventListener("click", remove1);
+
+
 
 
 function removeAll(event) {
     if (event.target.id === "clearBtn") {
-        localStorage.clear();
-        let parent1 = event.target.parentElement;
-        let delNode = parent1.querySelectorAll(".mainDiv");
 
-        delNode.forEach(element => {
-            if (element) {
-                element.classList.add("cssTran");
-                setTimeout(() => {
-                    element.remove();
-                }, 700)
-            }
+        let isConfirmed = confirm("Are you sure to clear list?");
 
-        });
+        if (isConfirmed) {
+            localStorage.clear();
+            let parent1 = event.target.parentElement;
+            let delNode = parent1.querySelectorAll(".mainDiv");
+
+            delNode.forEach(element => {
+                if (element) {
+                    element.classList.add("cssTran");
+                    setTimeout(() => {
+                        element.remove();
+                    }, 700)
+                }
+
+            });
+        }
+
+
 
     }
 }
 
 btmDiv.addEventListener("click", removeAll);
+
+
+//checkBox Events handels
+
+
+
+
+
+function saveCheckBoxes(event) {
+    // for(int i=0;i<checkBoxes.le)
+
+    if (event.target.type === "checkbox") {
+        let adj = event.target.nextElementSibling;
+
+        let txt = adj.textContent;
+
+        let items = JSON.parse(localStorage.getItem("myItems")) || [];
+
+        
+        let newItems;
+
+        items.forEach(e =>{
+            if(e[0] == txt){
+                e[1] = event.target.checked;
+            }
+        })
+        localStorage.setItem("myItems", JSON.stringify(items));
+    }
+
+}
+
+btmDiv.addEventListener("change",saveCheckBoxes);
+
+
 
 function addThroughLocal() {
 
@@ -131,6 +175,7 @@ function addThroughLocal() {
     // console.log(z)
     let values = JSON.parse(localStorage.getItem("myItems"))
 
+    if(values == []) return;
     // console.log(values);
 
     values.forEach(value => {
@@ -139,7 +184,7 @@ function addThroughLocal() {
         maindiv.classList = "mainDiv";
 
         // if(event.target.tagName === "BUTTON")
-        
+
 
         let button = document.createElement("button");
         button.classList = "deleteBtn";
@@ -149,13 +194,14 @@ function addThroughLocal() {
         div.classList = "items";
 
         let div2 = document.createElement("div");
-        div2.textContent = value;
+        div2.textContent = value[0];
         div.append(div2);
 
         //inserting a checkbox
         let inp = document.createElement("input");
         inp.id = 'checkbox';
         inp.type = "checkbox";
+        inp.checked = value[1];
         div.insertAdjacentElement("afterbegin", inp);
 
         maindiv.append(div);
