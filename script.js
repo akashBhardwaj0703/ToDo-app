@@ -30,6 +30,12 @@ function deleteLocal(note) {
 
 function addItem(event) {
     let value = getInput();
+
+    
+
+    // value = value.trim();        can add if dont want to add leading and preceding spaces
+    if(value === "") return; 
+
     
     let a = fillLocal(value);
     if (a == 0) return;
