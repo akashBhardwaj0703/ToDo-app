@@ -12,7 +12,7 @@
 ## 📦 Installation  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/ToDo-app.git
+   git clone https://github.com/akashbhardwaj0703/ToDo-app.git
 
 2. Open index.html in a browser.
 
